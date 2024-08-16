@@ -1,0 +1,71 @@
+<button (click)="setVisible()">
+    {{visible ? "Ocultar" : "Mostrar"}}
+</button>
+
+@if (visible) {
+    <h2>{{title}} </h2>
+    <div>total: {{counter}} </div>
+    <div>
+
+        @if(usuarios != undefined && usuarios.length){
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (item of usuarios; track $index) {
+                        <tr>
+                            <td>{{$index + 1}}</td>
+                            <td>{{item}}</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        } @else {
+            <ng-template>
+                <div>Loading...</div>
+            </ng-template>
+        }
+
+    </div>
+} @else {
+    <h2>Lo siento vista no disponible</h2>
+}
+
+<app-counter [title]="subtitle" (counterEmit)="setCounter($event)"></app-counter>
+
+<!-- <div *ngIf="visible; else notEnable">
+    <h2>{{title}} </h2>
+    <h3>{{usuarios}} </h3>
+</div>
+
+
+<ng-template #notEnable>
+    <div>No disponible</div>
+</ng-template>
+
+<div *ngIf="visible">
+    <table *ngIf="usuarios != undefined && usuarios.length > 0 else loading">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of usuarios; let i =index">
+                <td>{{i}}</td>
+                <td>{{item}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ng-template #loading>
+        <div>Loading...</div>
+    </ng-template>
+</div> -->
